@@ -54,13 +54,6 @@ radio.onReceivedMessage(RadioMessage.left, function () {
 })
 radio.onReceivedMessage(RadioMessage.clutch, function () {
     Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 0)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . # . .
-        . . . . .
-        . . . . .
-        `)
 })
 radio.onReceivedMessage(RadioMessage.forward, function () {
     Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
@@ -89,15 +82,15 @@ radio.onReceivedMessage(RadioMessage.right, function () {
     Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
 })
 radio.onReceivedMessage(RadioMessage.speedlr, function () {
-    null
+    countdown += 1
     if (countdown == 1) {
-        speedlr = 255
         basic.showIcon(IconNames.Angry)
+        speedlr = 255
     }
     if (countdown == 2) {
-        speedlr = 80
+        speedlr = 70
         basic.showIcon(IconNames.Heart)
-        countdown = 3
+        countdown = 0
     }
 })
 let countdown = 0
@@ -108,7 +101,7 @@ radio.setTransmitPower(7)
 Tinybit.RGB_Car_Program().showColor(neopixel.colors(NeoPixelColors.Purple))
 Tinybit.RGB_Car_Program().setBrightness(255)
 Tinybit.RGB_Car_Big(Tinybit.enColor.OFF)
-speedlr = 80
+speedlr = 70
 basic.forever(function () {
 	
 })
