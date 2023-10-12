@@ -5,7 +5,8 @@ enum RadioMessage {
     forward = 16348,
     back = 39633,
     ok = 31318,
-    clutch = 48290
+    clutch = 48290,
+    speedlr = 5064
 }
 radio.onReceivedMessage(RadioMessage.back, function () {
     Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
@@ -40,7 +41,7 @@ radio.onReceivedMessage(RadioMessage.ok, function () {
 })
 radio.onReceivedMessage(RadioMessage.left, function () {
     Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Left, 70)
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Left, speedlr)
     basic.showLeds(`
         . . # . .
         . . . # .
@@ -76,7 +77,7 @@ radio.onReceivedMessage(RadioMessage.forward, function () {
 })
 radio.onReceivedMessage(RadioMessage.right, function () {
     Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Right, 70)
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Right, speedlr)
     Tinybit.RGB_Car_Program().showColor(neopixel.colors(NeoPixelColors.Green))
     basic.showLeds(`
         . . # . .
@@ -87,12 +88,18 @@ radio.onReceivedMessage(RadioMessage.right, function () {
         `)
     Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
 })
+radio.onReceivedMessage(RadioMessage.speedlr, function () {
+    speedlr = 255
+    basic.showIcon(IconNames.Angry)
+})
 let speed = 0
+let speedlr = 0
 radio.setGroup(1)
 radio.setTransmitPower(7)
 Tinybit.RGB_Car_Program().showColor(neopixel.colors(NeoPixelColors.Purple))
 Tinybit.RGB_Car_Program().setBrightness(255)
 Tinybit.RGB_Car_Big(Tinybit.enColor.OFF)
+speedlr = 80
 basic.forever(function () {
 	
 })
