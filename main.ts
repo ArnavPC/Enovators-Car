@@ -89,9 +89,18 @@ radio.onReceivedMessage(RadioMessage.right, function () {
     Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
 })
 radio.onReceivedMessage(RadioMessage.speedlr, function () {
-    speedlr = 255
-    basic.showIcon(IconNames.Angry)
+    null
+    if (countdown == 1) {
+        speedlr = 255
+        basic.showIcon(IconNames.Angry)
+    }
+    if (countdown == 2) {
+        speedlr = 80
+        basic.showIcon(IconNames.Heart)
+        countdown = 3
+    }
 })
+let countdown = 0
 let speed = 0
 let speedlr = 0
 radio.setGroup(1)
